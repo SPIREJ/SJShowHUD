@@ -11,8 +11,6 @@
 
 @interface ViewController ()
 - (IBAction)showHudBtnTouch:(UIButton *)sender;
-- (IBAction)stopHudBtnTouch:(UIButton *)sender;
-
 
 @end
 
@@ -24,7 +22,7 @@
 }
 
 - (IBAction)showHudBtnTouch:(UIButton *)sender {
-    [SJShowWaitingAlert showWaitingContent:XSLoadingViewLoadingText inView:self];
+    [SJShowWaitingAlert showWaitingContent:SJLoadingViewLoadingText inView:self];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [SJShowWaitingAlert hideWaitingInView:self];

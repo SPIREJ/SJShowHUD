@@ -26,7 +26,7 @@
         }
 }
 
-
+//在主线程中刷新UI，不这么做好像也没影响
 //+ (void)showWaitingContent:(NSString *)alert inView:(id)delegate{
 //    dispatch_async(dispatch_get_global_queue(0, 0), ^{
 //        if (![alert isEqualToString:@"noAlert"]) {
@@ -75,8 +75,12 @@
         MRProgressOverlayView *progressView = [[MRProgressOverlayView alloc] init];
         progressView.mode = MRProgressOverlayViewModeCustom;
         progressView.modeView = [[SJShowHUDView alloc] init];
+//让progressView.modeView初始化SJShowHUDView，达到加载窗的效果
         SJShowHUDView *loadingView = (SJShowHUDView *)progressView.modeView;
-        [loadingView startLoading];
+#warning - 这里可以选择是系统的菊花，还是自己定义的图片效果
+//        [loadingView startLoading];
+        [loadingView startAnimation];
+        
         loadingView.loading.text = content;
         [view addSubview:progressView];
         [progressView show:YES];
@@ -92,7 +96,9 @@
                 MRProgressOverlayView *progress = (MRProgressOverlayView *)view;
                 if ([progress.modeView isKindOfClass:[SJShowHUDView class]]) {
                     SJShowHUDView *loadView = (SJShowHUDView *)progress.modeView;
-                    [loadView stopLoading];
+
+//                    [loadView stopLoading];
+                    [loadView endAnimation];
                 }
                 [(MRProgressOverlayView *)view dismiss:NO];
             } afterDelay:0.1];

@@ -11,6 +11,8 @@
 
 @interface SJShowWaitingAlert : NSObject
 
+//显示加载窗
 + (void)showWaitingContent:(NSString *)alert inView:(id)delegate;
+//影藏加载窗
 + (void)hideWaitingInView:(id)delegate;
 @end
