@@ -7,8 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "SJShowWaitingAlert.h"
 
 @interface ViewController ()
+- (IBAction)showHudBtnTouch:(UIButton *)sender;
+- (IBAction)stopHudBtnTouch:(UIButton *)sender;
+
 
 @end
 
@@ -16,12 +20,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)showHudBtnTouch:(UIButton *)sender {
+    [SJShowWaitingAlert showWaitingContent:XSLoadingViewLoadingText inView:self];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SJShowWaitingAlert hideWaitingInView:self];
+    });
 }
 
 @end
